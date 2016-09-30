@@ -1,0 +1,35 @@
+so i wanted to setup a nextcloud;
+
+it seemed strigth forward , but now i have to change the database settings 
+becuase i wanted to use one central database
+
+
+#secondary jail
+pkg install nextcloud php56  mod_php56 apache24
+
+echo "        Alias /nextcloud /usr/local/www/nextcloud
+        AcceptPathInfo On
+        <Directory /usr/local/www/nextcloud>
+            AllowOverride All
+            Require all granted
+        </Directory>
+" >> /usr/local/etc/apache24/httpd.conf
+
+#and add 
+<FilesMatch "\.php$">
+    SetHandler application/x-httpd-php
+</FilesMatch>
+<FilesMatch "\.phps$">
+    SetHandler application/x-httpd-php-source
+</FilesMatch>
+
+
+#to your httpd.conf
+# you should set 
+ServerName
+#and
+ServerAdmin
+#too
+
+service apache24 restart
+#now you can configure in the gui
